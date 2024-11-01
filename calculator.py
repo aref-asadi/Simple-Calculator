@@ -1,5 +1,3 @@
-# calculator.py
-
 import tkinter as tk
 from tkinter import messagebox
 
@@ -29,9 +27,16 @@ def calculate():
 root = tk.Tk()
 root.title("Calculator")
 
+# Configure the grid to be responsive
+root.rowconfigure(0, weight=1)  # Entry row
+for i in range(1, 6):           # Button rows (5 rows total with buttons)
+    root.rowconfigure(i, weight=1)
+for j in range(4):               # 4 columns for buttons
+    root.columnconfigure(j, weight=1)
+
 # Entry widget for displaying the input and result
-entry = tk.Entry(root, width=25, font=("Arial", 16), borderwidth=5, justify="right")
-entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+entry = tk.Entry(root, font=("Arial", 16), borderwidth=5, justify="right")
+entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10, sticky="nsew")
 
 # Create buttons for digits, operators, and parentheses in the specified layout
 buttons = [
@@ -47,11 +52,15 @@ row = 1
 col = 0
 for button_text in buttons:
     if button_text == '=':
-        tk.Button(root, text=button_text, width=5, height=2, command=calculate).grid(row=row, column=col, padx=5, pady=5)
+        btn = tk.Button(root, text=button_text, command=calculate)
     elif button_text == 'clear':
-        tk.Button(root, text=button_text, width=5, height=2, command=clear).grid(row=row, column=col, padx=5, pady=5)
+        btn = tk.Button(root, text=button_text, command=clear)
     else:
-        tk.Button(root, text=button_text, width=5, height=2, command=lambda value=button_text: press_button(value)).grid(row=row, column=col, padx=5, pady=5)
+        btn = tk.Button(root, text=button_text, command=lambda value=button_text: press_button(value))
+    
+    # Make buttons expand to fill their grid cells
+    btn.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
+    
     col += 1
     if col > 3:  # Move to the next row after every 4 columns
         col = 0
