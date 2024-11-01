@@ -1,6 +1,6 @@
 # Calculator
 
-A basic calculator application in Python that performs fundamental arithmetic operations with a graphical user interface (GUI) designed to resemble a typical calculator.
+A basic calculator application in Python that performs fundamental arithmetic operations with a graphical user interface (GUI) designed to resemble a typical calculator. This version includes a responsive grid layout, making the interface adaptable to different window sizes.
 
 ## Features
 - Performs basic arithmetic operations:
@@ -9,7 +9,7 @@ A basic calculator application in Python that performs fundamental arithmetic op
   - **Multiplication**
   - **Division** (with handling for division by zero)
   - **Parentheses** for complex expressions
-- User-friendly graphical interface with buttons for digits, operators, and parentheses.
+- User-friendly graphical interface with responsive grid layout, making it adaptable to different screen sizes.
 - Clear button to reset the input.
 
 ## Requirements
@@ -70,7 +70,8 @@ The layout in the GUI is as follows:
 The project consists of a single Python file, `calculator.py`, which contains:
 1. **Arithmetic Functionality**: Handles the expression-building and calculation using Python’s `eval()` function.
 2. **GUI Design**: Created using `tkinter` with buttons laid out in a grid pattern to resemble a calculator.
-3. **Error Handling**: Displays an error message for invalid inputs.
+3. **Responsive Grid Layout**: The grid layout is responsive, allowing the calculator to adapt its button sizes based on the window size.
+4. **Error Handling**: Displays an error message for invalid inputs.
 
 ## Error Handling
 
