@@ -64,7 +64,7 @@ def calculate():
 
 # GUI setup
 root = tk.Tk()  # Create the main application window
-root.title("Simple Calculator")  # Set the window title
+root.title("Calculator")  # Set the window title
 
 # Operation selection dropdown
 operation = tk.StringVar(value="Addition")  # Store the selected operation
