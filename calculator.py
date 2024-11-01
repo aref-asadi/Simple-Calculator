@@ -22,7 +22,7 @@ def divide(x, y):
 # Main calculator function to handle user input and perform operations
 def calculator():
     # Display the calculator menu
-    print("Simple Calculator")
+    print("Calculator")
     print("Select operation:")
     print("1. Addition")
     print("2. Subtraction")
