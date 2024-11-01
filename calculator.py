@@ -33,6 +33,8 @@ def divide(x, y):
         return "Error: Division by zero"  # Return error message if y is zero
     return x / y  # Returns the division of x by y
 
+def exponentiate(x, y):
+     return x ** y  # Returns the exponentiate of x by y   
 
 # Main calculator function to handle user input and perform operations
 def calculator():
@@ -90,7 +92,9 @@ def calculator():
                 num2 = float(input("Enter second number: "))
 
                 if choice == "1":
-                    print(f"Result: {add(num1, num2)}")
+                    print(f"Result: {divide(num1, num2)}")  # Calls divide function and displays result  
+                elif choice == "2":
+                    print(f"Result: {exponentiate(num1, num2)}")  # Calls divide function and displays result  
             except ValueError:
                 print("Invalid input. Please enter a number.")
     else:
