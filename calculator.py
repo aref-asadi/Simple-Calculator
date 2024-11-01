@@ -1,4 +1,14 @@
 # calculator.py
+import os, platform
+
+
+def clear_screen():
+    if platform.system() == "Windows":
+        os.system("cls")
+    elif platform.system() == "Linux":
+        os.system("clear")
+    else:
+        return "Unknown system."
 
 
 # Define a function to perform addition
@@ -28,14 +38,15 @@ def divide(x, y):
 def calculator():
     # Display the calculator menu
     print("Calculator")
-    print("Select operation:")
+    print("Select operation:\n")
     print("1. Addition")
     print("2. Subtraction")
     print("3. Multiplication")
     print("4. Division")
+    print("5. Other\n")
 
     # Get the user's choice of operation
-    choice = input("Enter your choice (1/2/3/4): ")
+    choice = input("Enter your choice (1/2/3/4/5): ")
 
     # Check if the choice is valid (1, 2, 3, or 4)
     if choice in ("1", "2", "3", "4"):
@@ -64,6 +75,24 @@ def calculator():
         except ValueError:
             # Handle the case where the input is not a number
             print("Invalid input. Please enter a number.")
+    elif choice == "5":
+        clear_screen()
+        print("Calculator")
+        print("Select operation:\n")
+        print("1. Square root")
+        print("2. Exponentiation\n")
+
+        choice = input("Enter your choice (1/2): ")
+        if choice in ("1", "2"):
+            try:
+                # Prompt the user to enter two numbers
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+
+                if choice == "1":
+                    print(f"Result: {add(num1, num2)}")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
     else:
         # Handle the case where an invalid operation choice is entered
         print("Invalid choice. Please select a valid operation.")
