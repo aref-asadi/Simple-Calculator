@@ -36,6 +36,19 @@ def divide(x, y):
 def exponentiate(x, y):
      return x ** y  # Returns the exponentiate of x by y   
 
+def square_root(n, tolerance=1e-10):
+    if n < 0:
+        raise ValueError("Cannot compute the square root of a negative number.")
+    if n == 0:
+        return 0
+
+    x = n  # Initial guess
+    while True:
+        new_x = 0.5 * (x + n / x)
+        if abs(new_x - x) < tolerance:
+            return new_x
+        x = new_x
+
 # Main calculator function to handle user input and perform operations
 def calculator():
     # Display the calculator menu
@@ -87,13 +100,14 @@ def calculator():
         choice = input("Enter your choice (1/2): ")
         if choice in ("1", "2"):
             try:
-                # Prompt the user to enter two numbers
-                num1 = float(input("Enter first number: "))
-                num2 = float(input("Enter second number: "))
-
                 if choice == "1":
-                    print(f"Result: {divide(num1, num2)}")  # Calls divide function and displays result  
+                    # Prompt the user to enter number
+                    num = float(input("Enter number: "))
+                    print(f"Result: {square_root(num)}")  # Calls divide function and displays result  
                 elif choice == "2":
+                    # Prompt the user to enter two numbers
+                    num1 = float(input("Enter first number: "))
+                    num2 = float(input("Enter second number: "))
                     print(f"Result: {exponentiate(num1, num2)}")  # Calls divide function and displays result  
             except ValueError:
                 print("Invalid input. Please enter a number.")
