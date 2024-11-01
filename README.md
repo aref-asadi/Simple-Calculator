@@ -1,6 +1,6 @@
 # Calculator
 
-A basic calculator application in Python that performs fundamental arithmetic operations with both command-line (CLI) and graphical user interface (GUI) options.
+A basic calculator application in Python that performs fundamental arithmetic operations with a graphical user interface (GUI) designed to resemble a typical calculator.
 
 ## Features
 - Performs basic arithmetic operations:
@@ -8,12 +8,9 @@ A basic calculator application in Python that performs fundamental arithmetic op
   - **Subtraction**
   - **Multiplication**
   - **Division** (with handling for division by zero)
-  - **Exponentiation**
-  - **Square Root** (with handling for negative numbers)
-- Two user interface options:
-  - **Command-Line Interface (CLI)**
-  - **Graphical User Interface (GUI)** using `tkinter`
-- Supports multiple calculations in one session with an exit option.
+  - **Parentheses** for complex expressions
+- User-friendly graphical interface with buttons for digits, operators, and parentheses.
+- Clear button to reset the input.
 
 ## Requirements
 - Python 3.x
@@ -34,22 +31,6 @@ A basic calculator application in Python that performs fundamental arithmetic op
 
 ## Usage
 
-### Command-Line Interface (CLI)
-
-1. Open a terminal.
-2. Navigate to the directory where `calculator.py` is located.
-3. Run the calculator:
-   ```bash
-   python calculator.py
-   ```
-4. Follow the on-screen prompts to:
-   - Select an operation by entering the corresponding number.
-   - Input one or two numbers based on the operation.
-   - View the result or continue with additional calculations.
-5. To exit, select the exit option from the menu.
-
-### Graphical User Interface (GUI)
-
 1. Open a terminal.
 2. Navigate to the directory where `calculator.py` is located.
 3. Run the calculator:
@@ -57,52 +38,44 @@ A basic calculator application in Python that performs fundamental arithmetic op
    python calculator.py
    ```
 4. In the GUI window:
-   - Select an operation from the dropdown menu.
-   - Enter the first number (and second number if applicable).
-   - Click "Calculate" to see the result displayed.
-   
-## Example (CLI)
+   - Click on buttons to build a mathematical expression.
+   - Press `=` to calculate and display the result.
+   - Use `clear` to reset the input field for a new calculation.
 
-Here's an example session in the CLI:
+## Button Layout
+
+The button layout in the GUI resembles a typical calculator, with each button performing the following functions:
+
+| Button | Function               |
+|--------|-------------------------|
+| 0–9    | Enters digits          |
+| +, -, *, / | Performs basic operations |
+| ( , )  | Allows grouping with parentheses |
+| =      | Evaluates the expression and displays the result |
+| .      | Adds a decimal point    |
+| clear  | Clears the input field |
+
+The layout in the GUI is as follows:
 
 ```plaintext
-Calculator
-Select operation:
-1. Addition
-2. Subtraction
-3. Multiplication
-4. Division
-5. Exponentiation
-6. Square Root
-7. Exit
-Enter choice (1/2/3/4/5/6/7): 1
-Enter first number: 10
-Enter second number: 5
-Result: 15.0
+7    8    9    /
+4    5    6    *
+1    2    3    -
+0    (    )    +
+=    .    clear
 ```
 
 ## Code Structure
 
 The project consists of a single Python file, `calculator.py`, which contains:
-
-1. **Arithmetic Functions**: `add`, `subtract`, `multiply`, `divide`, `exponentiate`, and `square_root`, each performing a specific mathematical operation.
-2. **Main Calculator Functions**:
-   - **CLI Mode**: The `calculator()` function handles user input and operations via the command line.
-   - **GUI Mode**: Uses `tkinter` to create a simple graphical interface.
-3. **Execution Check**: Ensures the calculator runs when executed directly, not when imported as a module.
+1. **Arithmetic Functionality**: Handles the expression-building and calculation using Python’s `eval()` function.
+2. **GUI Design**: Created using `tkinter` with buttons laid out in a grid pattern to resemble a calculator.
+3. **Error Handling**: Displays an error message for invalid inputs.
 
 ## Error Handling
 
 - **Division by zero**: Displays an error message for division by zero.
-- **Invalid input**: Shows a prompt for non-numeric input errors.
-- **Square root of negative numbers**: Handles cases with an error message when attempting to find the square root of a negative number.
-
-## Future Improvements
-
-Possible additions include:
-- More mathematical operations (e.g., logarithmic and trigonometric functions).
-- Calculation history for each session.
-- Additional customization options for the GUI.
+- **Invalid input**: Shows an error message for improperly formatted expressions.
 
 ## License
 This project is open-source and available under the GPL-3.0 License.

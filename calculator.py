@@ -1,94 +1,61 @@
 # calculator.py
 
-import tkinter as tk  # Import tkinter for GUI
-from tkinter import messagebox  # Import messagebox for error dialogs
-import math  # Import math for square root function
+import tkinter as tk
+from tkinter import messagebox
 
-# Define a function to perform addition
-def add(x, y):
-    return x + y  # Returns the sum of x and y
+# Function to handle button press and update the expression
+def press_button(value):
+    current_text = entry.get()
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, current_text + str(value))
 
-# Define a function to perform subtraction
-def subtract(x, y):
-    return x - y  # Returns the difference between x and y
+# Function to clear the input field
+def clear():
+    entry.delete(0, tk.END)
 
-# Define a function to perform multiplication
-def multiply(x, y):
-    return x * y  # Returns the product of x and y
-
-# Define a function to perform division
-def divide(x, y):
-    # Check for division by zero
-    if y == 0:
-        return "Error: Division by zero"  # Return error message if y is zero
-    return x / y  # Returns the division of x by y
-
-# Define a function for exponentiation
-def exponentiate(base, exponent):
-    return base ** exponent  # Returns base raised to the power of exponent
-
-# Define a function for square root
-def square_root(x):
-    # Check for negative input
-    if x < 0:
-        return "Error: Square root of a negative number is not defined"  # Handle negative input
-    return math.sqrt(x)  # Returns the square root of x
-
-# Function to perform the selected operation and display the result
+# Function to evaluate the expression in the input field
 def calculate():
     try:
-        # Retrieve the first input number
-        num1 = float(entry1.get())
-        # For square root, only one number is required; set num2 to 0 if operation is square root
-        num2 = float(entry2.get()) if operation.get() != "Square Root" else 0
-        
-        # Perform calculation based on selected operation
-        if operation.get() == "Addition":
-            result = add(num1, num2)
-        elif operation.get() == "Subtraction":
-            result = subtract(num1, num2)
-        elif operation.get() == "Multiplication":
-            result = multiply(num1, num2)
-        elif operation.get() == "Division":
-            result = divide(num1, num2)
-        elif operation.get() == "Exponentiation":
-            result = exponentiate(num1, num2)
-        elif operation.get() == "Square Root":
-            result = square_root(num1)
-        
-        # Display result in the result label
-        result_label.config(text=f"Result: {result}")
-    except ValueError:
-        # Show error message if the input is not valid
-        messagebox.showerror("Invalid Input", "Please enter valid numbers.")
+        # Get the expression from the entry field
+        expression = entry.get()
+        result = eval(expression)  # Evaluate the expression
+        entry.delete(0, tk.END)  # Clear the entry field
+        entry.insert(tk.END, str(result))  # Display the result
+    except Exception:
+        messagebox.showerror("Error", "Invalid input")
+        entry.delete(0, tk.END)
 
-# GUI setup
-root = tk.Tk()  # Create the main application window
-root.title("Calculator")  # Set the window title
+# Initialize the main window
+root = tk.Tk()
+root.title("Calculator")
 
-# Operation selection dropdown
-operation = tk.StringVar(value="Addition")  # Store the selected operation
-tk.Label(root, text="Select Operation:").pack()  # Label for operation selection
-# Dropdown menu for selecting operation
-operations = ["Addition", "Subtraction", "Multiplication", "Division", "Exponentiation", "Square Root"]
-tk.OptionMenu(root, operation, *operations).pack()
+# Entry widget for displaying the input and result
+entry = tk.Entry(root, width=25, font=("Arial", 16), borderwidth=5, justify="right")
+entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
-# Input field for the first number
-tk.Label(root, text="Enter first number:").pack()  # Label for first number
-entry1 = tk.Entry(root)  # Entry widget for first number input
-entry1.pack()
+# Create buttons for digits, operators, and parentheses in the specified layout
+buttons = [
+    '7', '8', '9', '/', 
+    '4', '5', '6', '*', 
+    '1', '2', '3', '-', 
+    '0', '(', ')', '+',
+    '=', '.', 'clear'
+]
 
-# Input field for the second number
-tk.Label(root, text="Enter second number (if applicable):").pack()  # Label for second number
-entry2 = tk.Entry(root)  # Entry widget for second number input
-entry2.pack()
+# Place buttons in a grid layout
+row = 1
+col = 0
+for button_text in buttons:
+    if button_text == '=':
+        tk.Button(root, text=button_text, width=5, height=2, command=calculate).grid(row=row, column=col, padx=5, pady=5)
+    elif button_text == 'clear':
+        tk.Button(root, text=button_text, width=5, height=2, command=clear).grid(row=row, column=col, padx=5, pady=5)
+    else:
+        tk.Button(root, text=button_text, width=5, height=2, command=lambda value=button_text: press_button(value)).grid(row=row, column=col, padx=5, pady=5)
+    col += 1
+    if col > 3:  # Move to the next row after every 4 columns
+        col = 0
+        row += 1
 
-# Button to perform calculation
-tk.Button(root, text="Calculate", command=calculate).pack()  # Button to trigger calculation
-
-# Label to display the result
-result_label = tk.Label(root, text="Result: ")  # Label to show result
-result_label.pack()
-
-# Run the GUI application
-root.mainloop()  # Starts the tkinter event loop, keeping the window open
+# Start the main GUI loop
+root.mainloop()
